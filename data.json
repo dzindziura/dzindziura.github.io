@@ -1,0 +1,408 @@
+{
+   "title":"Tumbler Start-Up Guide",
+   "description":"Used in commissioning of a Tumbler",
+   "pages":[
+      {
+         "name":"Pre-Start-Up",
+         "elements":[
+            {
+               "type":"file",
+               "name":"Question1",
+               "title":"Installation - Photo of S/N Plate",
+               "isRequired":false,
+               "allowMultiple":true,
+               "imageHeight":"30em",
+               "imageWidth":"30em",
+               "storeDataAsText":false,
+               "maxSize":3145728
+            },
+            {
+               "type":"dropdown",
+               "name":"Question13",
+               "title":"Electric - Motor wired for high or low voltage",
+               "isRequired":false,
+               "choices":[
+                  "120V",
+                  "220V",
+                  "400V"
+               ]
+            },
+            {
+               "type":"checkbox",
+               "name":"Question2",
+               "title":"Installation - Shipping Braces Removed",
+               "isRequired":false,
+               "choices":[
+                  "Yes"
+               ],
+               "hasNone":true,
+               "noneText":"N/A"
+            },
+            {
+               "type":"checkbox",
+               "name":"Question3",
+               "title":"Installation - Check Airflow and Proper Movement",
+               "isRequired":false,
+               "choices":[
+                  "Yes"
+               ],
+               "hasNone":true,
+               "noneText":"N/A"
+            },
+            {
+               "type":"checkbox",
+               "name":"Question4",
+               "title":"Installation - Machine Leveled",
+               "isRequired":false,
+               "choices":[
+                  "Yes"
+               ],
+               "hasNone":true,
+               "noneText":"N/A"
+            },
+            {
+               "type":"checkbox",
+               "name":"Question5",
+               "title":"Installation - Leveling Legs Locked",
+               "isRequired":false,
+               "choices":[
+                  "Yes"
+               ],
+               "hasNone":true,
+               "noneText":"N/A"
+            },
+            {
+               "type":"text",
+               "name":"Question6",
+               "title":"Electric - Proper Input Voltage Present",
+               "isRequired":false,
+               "placeHolder":"In Volts"
+            },
+            {
+               "type":"checkbox",
+               "name":"Question7",
+               "title":"Electric - Wire Connections tight",
+               "isRequired":false,
+               "choices":[
+                  "Yes"
+               ],
+               "hasNone":true,
+               "noneText":"N/A"
+            },
+            {
+               "type":"text",
+               "name":"Question8",
+               "title":"Electric - Correct breaker size",
+               "isRequired":false,
+               "placeHolder":"In AMPS"
+            },
+            {
+               "type":"checkbox",
+               "name":"Question9",
+               "title":"Electric - Customer has correct non-fused disconnect",
+               "isRequired":false,
+               "choices":[
+                  "Yes",
+                  "No"
+               ],
+               "hasNone":true,
+               "noneText":"N/A"
+            },
+            {
+               "type":"checkbox",
+               "name":"Question11",
+               "title":"Electric - Proper configuration jumper installed",
+               "isRequired":false,
+               "choices":[
+                  "Yes"
+               ],
+               "hasNone":true,
+               "noneText":"N/A"
+            },
+            {
+               "type":"checkbox",
+               "name":"Question12",
+               "title":"Electric - Ferrite rings installed",
+               "isRequired":false,
+               "choices":[
+                  "Yes"
+               ],
+               "hasNone":true,
+               "noneText":"N/A"
+            },
+            {
+               "type":"dropdown",
+               "name":"Question10",
+               "title":"Gas - Verify gas type",
+               "isRequired":false,
+               "choices":[
+                  "NG",
+                  "LP"
+               ]
+            },
+            {
+               "type":"checkbox",
+               "name":"Question14",
+               "title":"Gas - Is gas line looped?",
+               "isRequired":false,
+               "choices":[
+                  "Yes",
+                  "No",
+                  "N/A"
+               ]
+            },
+            {
+               "type":"text",
+               "name":"Question15",
+               "title":"Gas - Gas main size",
+               "isRequired":false,
+               "placeHolder":"In Inches"
+            },
+            {
+               "type":"checkbox",
+               "name":"Question16",
+               "title":"Gas - line sized properly for main line to tumbler ",
+               "isRequired":false,
+               "choices":[
+                  "Yes",
+                  "No",
+                  "N/A"
+               ]
+            },
+            {
+               "type":"checkbox",
+               "name":"Question17",
+               "title":"Gas - Check gas line for leaks ",
+               "isRequired":false,
+               "choices":[
+                  "Yes",
+                  "No",
+                  "N/A"
+               ]
+            },
+            {
+               "type":"checkbox",
+               "name":"Question18",
+               "title":"Gas - Is a sediment trap used",
+               "isRequired":false,
+               "choices":[
+                  "Yes",
+                  "No",
+                  "N/A"
+               ]
+            },
+            {
+               "type":"text",
+               "name":"Question19",
+               "title":"Exhaust - Proper Vent Diameter",
+               "isRequired":false,
+               "placeHolder":"in inches"
+            },
+            {
+               "type":"checkbox",
+               "name":"Question20",
+               "title":"Exhaust - Minimum Elbows Used",
+               "isRequired":false,
+               "choices":[
+                  "Yes",
+                  "No",
+                  "N/A"
+               ]
+            },
+            {
+               "type":"text",
+               "name":"Question21",
+               "title":"Exhaust - Proper make-up air opening",
+               "isRequired":false,
+               "placeHolder":"in square feet"
+            },
+            {
+               "type":"checkbox",
+               "name":"Question22",
+               "title":"Exhaust - Louver/screen installed",
+               "isRequired":false,
+               "choices":[
+                  "Yes",
+                  "No",
+                  "N/A"
+               ]
+            },
+            {
+               "type":"checkbox",
+               "name":"Question23",
+               "title":"Exhaust - Back draft dampers unobstructed and functioning properly",
+               "isRequired":false,
+               "choices":[
+                  "Yes",
+                  "No",
+                  "N/A"
+               ]
+            },
+            {
+               "type":"text",
+               "name":"Question24",
+               "title":"Exhaust - Back pressure",
+               "isRequired":false,
+               "placeHolder":"w.c.i"
+            },
+            {
+               "type":"checkbox",
+               "name":"Question25",
+               "title":"Exhaust - Outlet at least 36\" above grade",
+               "isRequired":false,
+               "choices":[
+                  "Yes",
+                  "No",
+                  "N/A"
+               ]
+            }
+         ],
+         "title":"Pre-Start-Up",
+         "description":"Refer to the installation manual supplied with the machines for more information."
+      },
+      {
+         "name":"Start-Up",
+         "elements":[
+            {
+               "type":"checkbox",
+               "name":"Question26",
+               "title":"Wipe out cylinder using all-purpose cleaner or detergent and water solution",
+               "isRequired":false,
+               "choices":[
+                  "Yes",
+                  "N/A"
+               ]
+            },
+            {
+               "type":"matrixdynamic",
+               "name":"Question28",
+               "title":"Start Tumbler",
+               "isRequired":false,
+               "columns":[
+                  {
+                     "name":"Column1",
+                     "title":"Fan",
+                     "cellType":"text",
+                     "width":"50.00%"
+                  },
+                  {
+                     "name":"Column3",
+                     "title":"Basket",
+                     "cellType":"text",
+                     "width":"50.00%"
+                  }
+               ],
+               "allowAddRows":false,
+               "rowCount":1,
+               "minRowCount":1
+            },
+            {
+               "type":"matrixdynamic",
+               "name":"Question29",
+               "title":"Check gas pressure readings",
+               "description":"(If there is more than one tumble, start all tumblers and check for pressure fluctuation by checking tumbler on end of gas line.)  \t\t\t\t\t\t\n\t\t\t\t\t\t\n",
+               "isRequired":false,
+               "columns":[
+                  {
+                     "name":"Column1",
+                     "title":"Gas valve input",
+                     "cellType":"text",
+                     "width":"33.33%",
+                     "placeHolder":"w.c.i"
+                  },
+                  {
+                     "name":"Column2",
+                     "title":"Gas valve output",
+                     "cellType":"text",
+                     "width":"33.33%",
+                     "placeHolder":"w.c.i"
+                  },
+                  {
+                     "name":"Column3",
+                     "title":"Tumbler Quantities  ",
+                     "cellType":"text",
+                     "width":"33.33%"
+                  }
+               ],
+               "allowAddRows":false,
+               "rowCount":1,
+               "minRowCount":1
+            },
+            {
+               "type":"matrixdynamic",
+               "name":"Question30",
+               "title":"Check Amperage Readings",
+               "description":"(If there is more than one tumble, start all tumblers and check for amp fluctuation.)  \t\t\t\t\t\t\n\t\t\t\t\t\t\n",
+               "isRequired":false,
+               "columns":[
+                  {
+                     "name":"Column1",
+                     "title":"L1",
+                     "cellType":"text",
+                     "width":"33.33%"
+                  },
+                  {
+                     "name":"Column2",
+                     "title":"L2",
+                     "cellType":"text",
+                     "width":"33.33%"
+                  },
+                  {
+                     "name":"Column3",
+                     "title":"L3",
+                     "cellType":"text",
+                     "width":"33.33%"
+                  }
+               ],
+               "allowAddRows":false,
+               "rowCount":1,
+               "minRowCount":1
+            },
+            {
+               "type":"text",
+               "name":"Question31",
+               "title":"Check Exhaust back pressure readings",
+               "description":"(If there is more than one tumbler, start all tumblers and check for pressure increases at each tumbler.  )\t\t\t\t\t\t\n\t\t\t\t\t\t\n",
+               "isRequired":false
+            },
+            {
+               "type":"text",
+               "name":"Question32",
+               "title":"Verify control and computer functions (check all cycles and parameters to factory specs, temperature control, verify all LED's working)",
+               "isRequired":false
+            },
+            {
+               "type":"checkbox",
+               "name":"Question27",
+               "title":"Burner tube shutters adjusted and secure\t\t\t\t\t\t",
+               "isRequired":false,
+               "choices":[
+                  "Yes",
+                  "N/A"
+               ]
+            },
+            {
+               "type":"checkbox",
+               "name":"Question33",
+               "title":"Safety Checks",
+               "isRequired":false,
+               "choices":[
+                  "Airflow Switch",
+                  "Loading door switch",
+                  "Lint door switch",
+                  "Control panel switch",
+                  "Inspect rotation sensor (if applicable)"
+               ]
+            }
+         ],
+         "title":"Start-Up"
+      }
+   ],
+   "myShowQuestionNumbers":true,
+   "defaultLocale":"1033",
+   "IsRequiredToAnswer":false,
+   "SchemaError":[
+      
+   ],
+   "InternalVersion":1
+}

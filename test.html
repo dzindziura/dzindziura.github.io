@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inspection Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <form id="inspectionForm">
+        <div id="formContent"></div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script>
+    var jsonInput = ''; // Replace '...' with your actual JSON input string
+
+    // Parse the JSON input string
+    var jsonData = JSON.parse(jsonInput);
+
+    // Generate the form layout based on the JSON data
+    var formContent = document.getElementById('formContent');
+    var pages = jsonData.pages;
+    for (var i = 0; i < pages.length; i++) {
+        var page = pages[i];
+        var elements = page.elements;
+
+        var pageSection = document.createElement('div');
+        pageSection.className = 'mb-4';
+
+        var pageTitle = document.createElement('h4');
+        pageTitle.textContent = page.name;
+        pageSection.appendChild(pageTitle);
+
+        for (var j = 0; j < elements.length; j++) {
+            var element = elements[j];
+            var elementType = element.type;
+            var elementName = element.name;
+            var elementTitle = element.title;
+
+            var formGroup = document.createElement('div');
+            formGroup.className = 'form-group';
+
+            var label = document.createElement('label');
+            label.textContent = elementTitle;
+            formGroup.appendChild(label);
+
+            if (elementType === 'file') {
+                var fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.name = elementName;
+                fileInput.className = 'form-control-file';
+                formGroup.appendChild(fileInput);
+            } else {
+                var select = document.createElement('select');
+                select.name = elementName;
+                select.className = 'form-control';
+
+                var options = ['SAT', 'UNSAT', 'N/A'];
+                for (var k = 0; k < options.length; k++) {
+                    var option = document.createElement('option');
+                    option.textContent = options[k];
+                    select.appendChild(option);
+                }
+
+                formGroup.appendChild(select);
+            }
+
+            pageSection.appendChild(formGroup);
+        }
+
+        formContent.appendChild(pageSection);
+    }
+
+    // Handle form submission
+    var form = document.getElementById('inspectionForm');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Collect form data and process it as needed
+        var formData = new FormData(form);
+
+        // Store the form data in the custom Dataverse table
+        // Replace the following code with your actual logic to store the data
+
+        var formDataJson = {};
+        for (var pair of formData.entries()) {
+            formDataJson[pair[0]] = pair[1];
+        }
+
+        console.log(formDataJson); // Example output, replace with your logic
+    });
+</script>
+</body>
+</html>
