@@ -7,13 +7,20 @@ export class Fields {
     }
 
     fieldForComment = () => {
-        console.log(this.item.name)
         const comment = document.createElement("input");
         comment.setAttribute("type", "text");
         comment.setAttribute("name", this.block + "_" + this.item.name + "_" + "comment");
         comment.setAttribute("placeholder", "Enter your comment");
 
         this.element.append(comment);
+    }
+
+    fieldForColor = () => {
+        const color = document.createElement("input")
+        color.setAttribute("type", "color")
+        color.setAttribute("name", this.block + "_" + this.item.name + "_" + "color")
+
+        return color;
     }
 
     titleForQuestion = () => {
@@ -42,30 +49,18 @@ export class Fields {
 
     createFileField = () => {
         const fileInput = document.createElement("input");
+        const selectedFiles = [];
 
         fileInput.setAttribute("type", "file");
         fileInput.setAttribute("id", this.item.name);
         fileInput.setAttribute("name", this.block + "_" + this.item.name + '_' + "image");
-
-        fileInput.addEventListener("change", (event) => {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-
-            reader.onload = () => {
-                const base64Data = reader.result;
-                fileInput.value = base64Data;
-                console.log("Base64 data:", base64Data);
-            };
-
-            reader.readAsDataURL(file);
-        });
+        fileInput.setAttribute("multiple", true);
 
         this.element.append(fileInput);
     }
 
     selectSatUnsatNA = () => {
         //For Select Dropdown
-        console.log(this.block)
         const selectElement = document.createElement("select");
         selectElement.name = this.block + "_" + this.item.name + "_" + 'Response';
         const defaultOption = document.createElement("option");
@@ -85,6 +80,22 @@ export class Fields {
         const option3 = document.createElement("option");
         option3.setAttribute("value", "NA");
         option3.innerHTML = "NA";
+        selectElement.addEventListener('change', (event) => {
+            const selectedValue = event.target.value;
+            let color = document.createElement("input")
+            color.setAttribute("type", "color")
+            color.setAttribute("name", this.block + "_" + this.item.name + "_" + "color")
+            color.setAttribute("id", this.block + "_" + this.item.name + "_" + "colorID")
+            // if(event.target.value)
+            if(event.target.value === "UNSAT"){
+                selectElement.after(color);
+            }else{
+                const del = document.getElementById(this.block + "_" + this.item.name + "_" + "colorID");
+                del.remove();
+            }
+            // Виконати код, який потрібно виконати при зміні значення
+            // Наприклад, викликати функцію або оновити інші елементи сторінки
+        });
 
         selectElement.appendChild(option1);
         selectElement.appendChild(option2);

@@ -33,7 +33,6 @@ const createDropDown = (item, fieldset, block) => {
     const container = document.createElement('div');
     container.classList.add('form-group');
 
-    // console.log(block.name)
     // newselect.setAttribute("name", block.name + '_' + item.name + '_value');
     newselect.setAttribute( "name", block.name + '_' + item.name + '_value');
     newselect.setAttribute("required", true);
@@ -45,7 +44,6 @@ const createDropDown = (item, fieldset, block) => {
     newselect.add(defaultOption);
 
     item.choices.forEach(value => {
-        console.log(value === undefined)
         if(value !== undefined) {
             const optionElement = document.createElement("option");
             optionElement.text = value;
@@ -53,6 +51,9 @@ const createDropDown = (item, fieldset, block) => {
         }
     });
     const classForFields = new Fields(item, container, block.name);
+
+
+
     classForFields.titleForQuestion()
     container.appendChild(newselect);
     classForFields.selectSatUnsatNA();
@@ -75,7 +76,6 @@ const createCheckBox = (item, fieldset, block) => {
     newselect.add(defaultOption);
 
     item.choices.forEach(value => {
-        console.log(value === undefined)
         if(value !== undefined) {
             const optionElement = document.createElement("option");
             optionElement.text = value;
@@ -91,14 +91,15 @@ const createCheckBox = (item, fieldset, block) => {
     fieldset.append(container);
 }
 
-const createFile = (item, fieldset, block) => {
+const createFile = (item, fieldset, block, form) => {
     const divElement = document.createElement("div");
     const classForFields = new Fields(item, divElement, block.name);
 
 
 
+
     classForFields.titleForQuestion();
-    classForFields.createFileField();
+    classForFields.createFileField(form);
     classForFields.selectSatUnsatNA();
     classForFields.fieldForComment()
 
@@ -123,7 +124,6 @@ const createFieldSet = (item, form, fieldset, legend) => {
 }
 
 const createBtnForNewBlock = (item, fieldset, block) => {
-    console.log("BLOCK", block)
     //Add New Fields in Each Section
     const addButton = document.createElement("button");
     addButton.setAttribute("type", "button");
@@ -197,7 +197,6 @@ getDataFromJson()
         form.setAttribute("id", "myForm");
         form.setAttribute("action", "");
 
-        console.log(form)
         // createFieldSet(data, form, fieldset, legend);
         data.pages.map(item => {
             const fieldset = document.createElement("fieldset");
@@ -220,6 +219,8 @@ getDataFromJson()
                         break;
                     default: console.log('havent function');
                 }
+
+
             })
             createBtnForNewBlock(item, fieldset, item)
         })
@@ -237,8 +238,6 @@ getDataFromJson()
         submitButton.addEventListener("click", function() {
             const formData = new FormData(document.getElementById("myForm")); // Отримуємо дані з форми
             const serializedData = Object.fromEntries(formData); // Перетворюємо FormData на об'єкт
-            console.log(serializedData)
-            console.log(serializedData); // Виводимо дані в консоль або виконуємо інші дії з ними
             const pages = [];
 
             function findQuestion(page, questionName) {
@@ -261,22 +260,34 @@ getDataFromJson()
                     question = { name: questionName };
                     page.elements.push(question);
                 }
-                    question.title = serializedData[key.replace(field, "title")];
-                    question.Response = serializedData[key.replace(field, "Response")];
-                    question.comments = serializedData[key.replace(field, "comment")];
 
-                const file = serializedData[key.replace(field, "image")];
-                const reader = new FileReader();
+                question.title = serializedData[key.replace(field, "title")];
+                question.Response = serializedData[key.replace(field, "Response")];
+                question.comments = serializedData[key.replace(field, "comment")];
+                question.color = serializedData[key.replace(field, "color")];
+                // serializedData[key.replace(field, "image")];
+                const files = document.getElementById(questionName).files;
+                const selectedFiles = [];
+                    // const files = formData.get(key);
 
-                reader.onload = () => {
-                    const base64Data = reader.result;
-                        question.image = base64Data === 'data:' ? '' : base64Data;
-                };
+                    for (let i = 0; i < files.length; i++) {
+                        const file = files[i];
+                        const reader = new FileReader();
 
-                reader.readAsDataURL(file);
+                        reader.onload = () => {
+                            const base64Data = reader.result;
+                            // Store the selected file and its base64 data in the array
+                            selectedFiles.push(base64Data);
+                            if(i === files.length - 1){
+                                question.image = selectedFiles;
 
-                // question.image = serializedData[key.replace(field, "image")];
+                            }
+                        };
+
+                        reader.readAsDataURL(file);
+                }
             });
+
             console.log(pages);
         });
 
