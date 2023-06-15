@@ -1,170 +1,161 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Multi-Section Form</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <style>
-      .dropzone {
-        width: 200px;
-        height: 200px;
-        border: 2px dashed gray;
-        text-align: center;
-        line-height: 200px;
-        font-size: 20px;
-        margin: 50px auto;
-      }
+<head>
+  <title>Multi-Section Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    form {
+      width: 60%;
+      margin-left: 21%;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    #form-container {
+      background: #f3f3f3;
+      padding: 20px;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    section {
+      margin-bottom: 50px;
+    }
+    h1 {
+      margin-bottom: 30px;
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      color: #444444;
+    }
+    label {
+      font-size: 15px;
+      color: #444444;
+    }
+    legend {
+      color: royalblue !important;
+      font-weight: 600 !important;
+    }
+    /* #fieldset-first {
+      display: none;
+    } */
+    select {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      color: #444;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    select:hover {
+      border-color: #888;
+    }
+    select:focus {
+      border-color: #5b9dd9;
+      outline: none;
+      box-shadow: 0 0 3px rgba(0, 126, 255, 0.5);
+    }
+    input {
+      font-size: 16px;
+      color: #666666;
+      border-radius: 5px;
+      border: 2px solid #cccccc;
+      padding: 10px;
+      margin-bottom: 20px;
+      width: 100%;
+      transition: border-color 0.3s ease-in-out;
+    }
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    .btn {
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffffff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      transition: background-color 0.3s ease-in-out;
+    }
+    .btn:hover {
+      background-color: #0069d9;
+      cursor: pointer;
+    }
+    button {
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      margin-top: 20px;
+      border: 0px;
+      box-shadow: 2px 2px 5px 0px gray;
+      border-radius: 3px;
+      background: royalblue;
+      color: white;
+    }
+
+    button span {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: 0.5s;
+    }
+
+    button span:after {
+      content: "\00bb";
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -20px;
+      transition: 0.5s;
+    }
+
+    button:hover span {
+      padding-right: 25px;
+    }
+
+    button:hover span:after {
+      opacity: 1;
+      right: 0;
+    }
+    .add-btn {
+      background: mediumseagreen;
+    }
+    fieldset {
+      border: 2px solid lightsteelblue;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    @media screen and (max-width: 767px) {
       form {
-        width: 60%;
-        margin-left: 21%;
-        padding: 20px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      }
-      #form-container {
-        background: #f3f3f3;
-        padding: 20px;
-      }
-      .container {
-        margin-top: 50px;
-      }
-      section {
-        margin-bottom: 50px;
-      }
-      h1 {
-        margin-bottom: 30px;
-        font-size: 36px;
-        font-weight: bold;
-        text-align: center;
-        color: #444444;
-      }
-      label {
-        font-size: 15px;
-        color: #444444;
-      }
-      legend {
-        color: royalblue !important;
-        font-weight: 600 !important;
-      }
-      /* #fieldset-first {
-        display: none;
-      } */
-      select {
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-        color: #444;
+        max-width: 100%;
+        margin: 0 auto;
         width: 100%;
-        margin-bottom: 20px;
       }
-      select:hover {
-        border-color: #888;
-      }
-      select:focus {
-        border-color: #5b9dd9;
-        outline: none;
-        box-shadow: 0 0 3px rgba(0, 126, 255, 0.5);
-      }
-      input {
-        font-size: 16px;
-        color: #666666;
-        border-radius: 5px;
-        border: 2px solid #cccccc;
-        padding: 10px;
-        margin-bottom: 20px;
-        width: 100%;
-        transition: border-color 0.3s ease-in-out;
-      }
-      input:focus {
-        border-color: #007bff;
-        outline: none;
-      }
-      .btn {
-        font-size: 18px;
-        font-weight: bold;
-        color: #ffffff;
-        background-color: #007bff;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        transition: background-color 0.3s ease-in-out;
-      }
-      .btn:hover {
-        background-color: #0069d9;
-        cursor: pointer;
-      }
-      button {
-        padding-left: 50px;
-        padding-right: 50px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        margin-top: 20px;
-        border: 0px;
-        box-shadow: 2px 2px 5px 0px gray;
-        border-radius: 3px;
-        background: royalblue;
-        color: white;
-      }
-
-      button span {
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        transition: 0.5s;
-      }
-
-      button span:after {
-        content: "\00bb";
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: -20px;
-        transition: 0.5s;
-      }
-
-      button:hover span {
-        padding-right: 25px;
-      }
-
-      button:hover span:after {
-        opacity: 1;
-        right: 0;
-      }
-      .add-btn {
-        background: mediumseagreen;
-      }
-      fieldset {
-        border: 2px solid lightsteelblue;
-        padding: 10px;
-        border-radius: 5px;
-      }
-      @media screen and (max-width: 767px) {
-        form {
-          max-width: 100%;
-          margin: 0 auto;
-          width: 100%;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="form-container">
-      <div id="col-lg-12" class="col-lg-12">
-        <h1>Inspection Form</h1>
-      </div>
-    </div>
-    <script type="module" src="./script.js"></script>
-  </body>
+    }
+  </style>
+</head>
+<body>
+<div id="form-container">
+  <div id="col-lg-12" class="col-lg-12">
+    <h1>Inspection Form</h1>
+  </div>
+</div>
+<script type="module" src="./script.js"></script>
+</body>
 </html>

@@ -9,15 +9,25 @@ const createTextField = (items, fieldset, block) => {
     const inputElement = document.createElement('input');
     inputElement.type = items.type;
     inputElement.name = block.name + '_' + items.name + '_value';
-    inputElement.setAttribute("required", true);
+    inputElement.required = true;
+    inputElement.classList.add('form-control');
+
+    // Add event listener for input validation
+    inputElement.addEventListener("input", () => {
+        if (inputElement.value.trim() === '') {
+            inputElement.setCustomValidity("This field is required.");
+        } else {
+            inputElement.setCustomValidity("");
+        }
+    });
+
     if(items.placeHolder){
         inputElement.placeholder = items.placeHolder;
 
     }else{
-        inputElement.placeholder = '';
+        inputElement.placeholder = "Enter your answer";
 
     }
-    inputElement.classList.add('form-control');
 
     const classForFields = new Fields(items, container, block.name);
 
@@ -33,6 +43,7 @@ const createDropDown = (item, fieldset, block) => {
     const container = document.createElement('div');
     container.classList.add('form-group');
 
+    // console.log(block.name)
     // newselect.setAttribute("name", block.name + '_' + item.name + '_value');
     newselect.setAttribute( "name", block.name + '_' + item.name + '_value');
     newselect.setAttribute("required", true);
@@ -44,6 +55,7 @@ const createDropDown = (item, fieldset, block) => {
     newselect.add(defaultOption);
 
     item.choices.forEach(value => {
+        console.log(value === undefined)
         if(value !== undefined) {
             const optionElement = document.createElement("option");
             optionElement.text = value;
@@ -51,9 +63,6 @@ const createDropDown = (item, fieldset, block) => {
         }
     });
     const classForFields = new Fields(item, container, block.name);
-
-
-
     classForFields.titleForQuestion()
     container.appendChild(newselect);
     classForFields.selectSatUnsatNA();
@@ -76,6 +85,7 @@ const createCheckBox = (item, fieldset, block) => {
     newselect.add(defaultOption);
 
     item.choices.forEach(value => {
+        console.log(value === undefined)
         if(value !== undefined) {
             const optionElement = document.createElement("option");
             optionElement.text = value;
@@ -91,15 +101,14 @@ const createCheckBox = (item, fieldset, block) => {
     fieldset.append(container);
 }
 
-const createFile = (item, fieldset, block, form) => {
+const createFile = (item, fieldset, block) => {
     const divElement = document.createElement("div");
     const classForFields = new Fields(item, divElement, block.name);
 
 
 
-
     classForFields.titleForQuestion();
-    classForFields.createFileField(form);
+    classForFields.createFileField();
     classForFields.selectSatUnsatNA();
     classForFields.fieldForComment()
 
@@ -124,6 +133,7 @@ const createFieldSet = (item, form, fieldset, legend) => {
 }
 
 const createBtnForNewBlock = (item, fieldset, block) => {
+    console.log("BLOCK", block)
     //Add New Fields in Each Section
     const addButton = document.createElement("button");
     addButton.setAttribute("type", "button");
@@ -154,14 +164,14 @@ const createBtnForNewBlock = (item, fieldset, block) => {
 }
 
 const createNewSection = (form) => {
-        // Add a button to create a new section
+    // Add a button to create a new section
     var addSectionButton = document.createElement("button");
     addSectionButton.setAttribute("type", "button");
     addSectionButton.setAttribute("style", "background-color:slategray;");
     addSectionButton.innerHTML =
         "<i class='fas fa-border-none' style='font-size: 24px;'></i>";
     form.append(addSectionButton);
-        // Add event listener to create a new section when button is clicked
+    // Add event listener to create a new section when button is clicked
     addSectionButton.addEventListener("click", function () {
         var section = {
             title: "New-Section",
@@ -264,27 +274,27 @@ getDataFromJson()
                 question.title = serializedData[key.replace(field, "title")];
                 question.Response = serializedData[key.replace(field, "Response")];
                 question.comments = serializedData[key.replace(field, "comment")];
-                question.color = serializedData[key.replace(field, "color")];
+                question.Priority = serializedData[key.replace(field, "Priority")];
                 // serializedData[key.replace(field, "image")];
                 const files = document.getElementById(questionName).files;
                 const selectedFiles = [];
-                    // const files = formData.get(key);
+                // const files = formData.get(key);
 
-                    for (let i = 0; i < files.length; i++) {
-                        const file = files[i];
-                        const reader = new FileReader();
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
 
-                        reader.onload = () => {
-                            const base64Data = reader.result;
-                            // Store the selected file and its base64 data in the array
-                            selectedFiles.push(base64Data);
-                            if(i === files.length - 1){
-                                question.image = selectedFiles;
+                    reader.onload = () => {
+                        const base64Data = reader.result;
+                        // Store the selected file and its base64 data in the array
+                        selectedFiles.push(base64Data);
+                        if(i === files.length - 1){
+                            question.image = selectedFiles;
 
-                            }
-                        };
+                        }
+                    };
 
-                        reader.readAsDataURL(file);
+                    reader.readAsDataURL(file);
                 }
             });
 

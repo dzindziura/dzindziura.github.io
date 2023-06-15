@@ -7,20 +7,13 @@ export class Fields {
     }
 
     fieldForComment = () => {
+        console.log(this.item.name)
         const comment = document.createElement("input");
         comment.setAttribute("type", "text");
         comment.setAttribute("name", this.block + "_" + this.item.name + "_" + "comment");
         comment.setAttribute("placeholder", "Enter your comment");
 
         this.element.append(comment);
-    }
-
-    fieldForColor = () => {
-        const color = document.createElement("input")
-        color.setAttribute("type", "color")
-        color.setAttribute("name", this.block + "_" + this.item.name + "_" + "color")
-
-        return color;
     }
 
     titleForQuestion = () => {
@@ -49,7 +42,6 @@ export class Fields {
 
     createFileField = () => {
         const fileInput = document.createElement("input");
-        const selectedFiles = [];
 
         fileInput.setAttribute("type", "file");
         fileInput.setAttribute("id", this.item.name);
@@ -61,6 +53,7 @@ export class Fields {
 
     selectSatUnsatNA = () => {
         //For Select Dropdown
+        console.log(this.block)
         const selectElement = document.createElement("select");
         selectElement.name = this.block + "_" + this.item.name + "_" + 'Response';
         const defaultOption = document.createElement("option");
@@ -80,17 +73,45 @@ export class Fields {
         const option3 = document.createElement("option");
         option3.setAttribute("value", "NA");
         option3.innerHTML = "NA";
+
         selectElement.addEventListener('change', (event) => {
-            const selectedValue = event.target.value;
-            let color = document.createElement("input")
-            color.setAttribute("type", "color")
-            color.setAttribute("name", this.block + "_" + this.item.name + "_" + "color")
-            color.setAttribute("id", this.block + "_" + this.item.name + "_" + "colorID")
+            const dataElement = [
+                {color: "green", text: 'Low'},
+                {color: "#dfff00", text: 'Medium'},
+                {color: "red", text: 'High'}
+            ]
+            const div = document.createElement('select');
+
+            div.name = this.block + "_" + this.item.name + "_" + 'Priority';
+            div.id = this.block + "_" + this.item.name + "_" + 'Priority';
+            const defaultOptionColor = document.createElement("option");
+            defaultOptionColor.text = "Select Priority"; // Set the default value text
+            defaultOptionColor.value = ""
+            defaultOptionColor.selected = true; // Set it as the default selected option
+            div.add(defaultOptionColor);
+            div.style.color = "black";
+            dataElement.map(item => {
+                const option = document.createElement("option");
+                option.setAttribute("value", item.text);
+                option.style.backgroundColor = item.color;
+                option.style.color = "white";
+                option.innerHTML = item.text;
+                div.appendChild(option);
+            })
+            div.addEventListener('change', (event) => {
+                const color = dataElement.find(item => {
+                    if(item.text === event.target.value){
+                        console.log(item.color)
+                        return item.color;
+                    }
+                })
+                div.style.backgroundColor = color.color;
+            })
             // if(event.target.value)
             if(event.target.value === "UNSAT"){
-                selectElement.after(color);
+                selectElement.after(div);
             }else{
-                const del = document.getElementById(this.block + "_" + this.item.name + "_" + "colorID");
+                const del = document.getElementById(this.block + "_" + this.item.name + "_" + 'Priority');
                 del.remove();
             }
             // Виконати код, який потрібно виконати при зміні значення
